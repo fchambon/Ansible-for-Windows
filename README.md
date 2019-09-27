@@ -19,3 +19,7 @@ curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 ```
 az login
 ```
+- Module Python pour Windows <br/>
+```
+sudo pip install pywinrm
+```
