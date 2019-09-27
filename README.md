@@ -30,7 +30,7 @@ sudo pip install pywinrm
 ```
 code winhosts
 ```
-
+```
 [win]
 51.136.40.39
 
