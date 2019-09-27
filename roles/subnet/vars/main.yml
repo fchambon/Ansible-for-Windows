@@ -1,0 +1,5 @@
+---
+subnet_name: subnet-1
+address_prefix_cidr_subnet: "10.0.0.0/24"
+rg_name: RG-ansible-Win
+...

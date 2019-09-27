@@ -1,0 +1,4 @@
+---
+nsg_win_name: nsg-win
+rg_name: RG-ansible-Win
+...

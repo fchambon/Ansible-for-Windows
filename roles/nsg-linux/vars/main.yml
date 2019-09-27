@@ -1,0 +1,4 @@
+---
+nsg_linux_name: nsg-linux
+rg_name: RG-ansible-Win
+...

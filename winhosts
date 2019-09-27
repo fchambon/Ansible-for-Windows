@@ -1,0 +1,6 @@
+[win]
+51.136.40.39
+
+[win:vars]
+ansible_connection=ssh
+ansible_shell_type=powershell

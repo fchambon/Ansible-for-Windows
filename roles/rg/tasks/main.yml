@@ -1,0 +1,6 @@
+---
+- name: Installation du ressource groupe
+  azure_rm_resourcegroup:
+    name: "{{ rg_name }}"
+    location: "{{ location }}"
+...

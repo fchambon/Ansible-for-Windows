@@ -1,0 +1,17 @@
+---
+- name: installation de la VM-1
+  azure_rm_virtualmachine:
+    name: "{{ vm_name_vm_1 }}"
+    resource_group: "{{ rg_name }}"
+    vm_size: "{{ vm_size_vm_1 }}"
+    managed_disk_type: "{{ vm_type_disk_vm_1 }}"
+    admin_username: "{{ admin_user_vm_1 }}"
+    admin_password: "{{ password_vm_1 }}"
+    network_interfaces: "{{ nic_name_vm_1 }}"
+    os_type: Windows
+    image:
+      offer: "{{ offer_vm_1 }}"
+      publisher: "{{ publisher_vm_1 }}"
+      sku: "{{ sku_vm_1 }}"
+      version: "{{ version_vm_1 }}"
+...

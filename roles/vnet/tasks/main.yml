@@ -1,0 +1,7 @@
+---
+- name: Installation du virtual network
+  azure_rm_virtualnetwork:
+    name: "{{ vnet_name }}"
+    resource_group: "{{rg_name}}"
+    address_prefixes_cidr: "{{address_prefixes_cidr_vnet}}"    
+...

@@ -1,0 +1,15 @@
+---
+- name: initialize disk
+  win_shell:
+   "Initialize-Disk -Number 2"
+
+- name: create partition
+  win_partition:
+    drive_letter: S
+    partition_size: -1
+    disk_number: 2
+
+- name: format disk
+  win_shell:
+    "Format-Volume -DriveLetter S"
+...

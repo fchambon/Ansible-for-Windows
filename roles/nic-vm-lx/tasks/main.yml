@@ -1,0 +1,13 @@
+---
+- name: Creation de la NIC VM Linux
+  azure_rm_networkinterface:
+    name: "{{ nic_name_vm_lx }}"
+    resource_group: "{{ rg_name }}"
+    virtual_network: "{{ vnet_name }}"
+    subnet_name: "{{ subnet_name }}"
+    security_group: "{{ nsg_linux_name }}"
+    ip_configurations:
+      - name: ipconfig1
+        public_ip_address_name: "{{ public_ip_vm_lx }}"
+        primary: True
+...

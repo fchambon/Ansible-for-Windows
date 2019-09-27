@@ -1,0 +1,14 @@
+---
+- hosts: win
+  remote_user: pierrc
+  
+  roles:    
+    #- win_ad
+    #- set_ad
+    #- set_disk
+    
+...
+
+
+
+

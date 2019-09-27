@@ -1,0 +1,19 @@
+---
+- name: installation de la VM Linux
+  azure_rm_virtualmachine:
+    name: "{{ vm_name_vm_lx }}"
+    resource_group: "{{ rg_name }}"
+    vm_size: "{{ vm_size_vm_lx }}"
+    managed_disk_type: "{{ vm_type_disk_vm_lx }}"
+    admin_username: "{{ admin_username_vm_lx }}"
+    ssh_password_enabled: false
+    ssh_public_keys:
+       - path: /home/{{ admin_username_vm_lx }}/.ssh/authorized_keys
+         key_data: "{{ key_vm }}"
+    network_interfaces: "{{ nic_name_vm_lx }}"
+    image:
+      offer: "{{ offer_vm_lx }}"
+      publisher: "{{ publisher_vm_lx }}"
+      sku: "{{ sku_vm_lx }}"
+      version: "{{ version_vm_lx }}"
+...

@@ -1,0 +1,7 @@
+---
+- name: Installation de l' IP Publique VM-1
+  azure_rm_publicipaddress:
+    resource_group: "{{ rg_name }}"
+    name: "{{ public_ip_vm_1 }}"
+    allocation_method: "{{ allocation_method }}"
+...
