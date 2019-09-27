@@ -1,4 +1,4 @@
-# Quick Start Ansible pour Windows !
+# Quick Start Ansible pour Windows Server !
 
 **Prerequis pour la machine de controle :**<br/>
 Pour une distro Ubuntu 16.04 LTS : <br/>
@@ -10,4 +10,12 @@ sudo apt-get update && sudo apt-get install -y libssl-dev libffi-dev python-dev 
 Packages Ansible pour azure:
 ```
 sudo pip install ansible[azure]
+```
+Azure Cli <br/>
+```
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+```
+S'authentifier <br/>
+```
+az login
 ```
