@@ -8,7 +8,7 @@ Pour les machines cibles "Windows Server" il faudra installer un serveur OpenSSH
 Pour Windows Server 2019 c'est une nouvelle "feature". https://docs.microsoft.com/fr-fr/windows-server/administration/openssh/openssh_install_firstuse Exemple de template : https://github.com/Pierre-Chesne/Windows-Server-2019-OpenSSH <br/>
 Pour Windows Server 2016 https://github.com/PowerShell/Win32-OpenSSH/releases <br/>
 
-Pour le paramétrage du serveur OpenSSH :<br/>
+Pour le paramétrage du serveur OpenSSH (Windows 2016/2019) :<br/>
 - le shell par defaut doit être le PowerShell (dans la base de registre HKLM/SOFTWARE/OpenSSH DefaultShell mettre le chemin de PowerShell)<br/>
 - l'authentification par cle ssh <br/>
 modifier le fichier C:\ProgramData\ssh\sshd_config<br/>
