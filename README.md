@@ -9,13 +9,13 @@ Pour Windows Server 2019 c'est une nouvelle "feature". https://docs.microsoft.co
 Pour Windows Server 2016 https://github.com/PowerShell/Win32-OpenSSH/releases <br/>
 
 Pour le paramétrage du serveur OpenSSH (Windows 2016/2019) :<br/>
-- le shell par defaut doit être le PowerShell (dans la base de registre HKLM/SOFTWARE/OpenSSH DefaultShell mettre le chemin de PowerShell)<br/>
+- le shell par defaut doit être le PowerShell<br/>
+ -> Dans la base de registre HKLM/SOFTWARE/OpenSSH DefaultShell mettre le chemin de PowerShell (C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe)<br/>
 - l'authentification par cle ssh <br/>
 modifier le fichier C:\ProgramData\ssh\sshd_config<br/>
  -> decommenter 'PubkeyAuthentication yes'<br/>
- -> commenter '
-
-)
+ -> commenter '#Match Group administrators'<br/>
+ -> commenter '#AuthorizedKeysFile __PROGRAMDATA__/ssh/administrators_authorized_keys'<br/>
 
 **Prerequis pour la machine de controle :**<br/>
 Pour une distro Ubuntu 16.04 LTS : <br/>
