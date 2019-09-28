@@ -9,7 +9,7 @@ Pour Windows Server 2019 c'est une nouvelle "feature". https://docs.microsoft.co
 Pour Windows Server 2016 https://github.com/PowerShell/Win32-OpenSSH/releases <br/>
 
 Pour le paramétrage du serveur OpenSSH :<br/>
-- le shell par defaut doit être le PowerShell (dans la base de registre HKLM/SOFTWARE/OpenSSH DefaultShell metre le chemin de PowerShell)<br/>
+- le shell par defaut doit être le PowerShell (dans la base de registre HKLM/SOFTWARE/OpenSSH DefaultShell mettre le chemin de PowerShell)<br/>
 - l'authentification par cle ssh <br/>
 modifier le fichier C:\ProgramData\ssh\sshd_config<br/>
  -> decommenter 'PubkeyAuthentication yes'<br/>
