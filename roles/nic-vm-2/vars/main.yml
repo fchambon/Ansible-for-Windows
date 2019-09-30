@@ -1,8 +1,0 @@
----
-nic_name_vm_2: nic-vm-2
-rg_name: RG-ansible-Win
-vnet_name: vnet-1
-subnet_name: subnet-1
-nsg_win_name: nsg-win
-public_ip_vm_2: ip-Pub-vm-2
-...

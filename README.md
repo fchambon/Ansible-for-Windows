@@ -6,18 +6,18 @@ Dans ce quickstart, la communication entre la machine de controle Ansible et les
 **Prerequis pour les machines cibles Windows Server:**<br/>
 Pour les machines cibles "Windows Server", il faudra installer un serveur OpenSSH pour Windows avec authentification par cle publique.<br/>
 Pour Windows Server 2019 c'est une nouvelle "feature". https://docs.microsoft.com/fr-fr/windows-server/administration/openssh/openssh_install_firstuse Exemple de template : https://github.com/Pierre-Chesne/Windows-Server-2019-OpenSSH <br/>
-Pour Windows Server 2016 https://github.com/PowerShell/Win32-OpenSSH/releases <br/>
+Pour Windows Server 2016 https://github.com/PowerShell/Win32-OpenSSH/releases (prendre OpenSSH-Win64.zip)<br/>
 
 Pour le paramétrage du serveur OpenSSH (Windows 2016/2019) il faut :<br/>
 - Pour Windows Server 2016 <br/>
  -> copier "OpenSSH-Win64" dans "c:\Program Files" <br/>
  -> Executer "install-sshd.ps1" <br/>
  -> demarrer les services "OpenSSH SSH Server" & "OpenSSH Authentication Agent" <br/>
- -> créer un repertoire .ssh dans votre profil (ex: c:\users\pierrc\.ssh) <br/>
- -> créer un fichier texte "authorized_keys" (ex: c:\users\pierrc\.ssh\authorized_keys )<br/>
+ -> creer un repertoire .ssh dans votre profil (ex: c:\users\pierrc\.ssh) <br/>
+ -> creer un fichier texte "authorized_keys" (ex: c:\users\pierrc\.ssh\authorized_keys )<br/>
  -> editez le fichier "authorized_keys" et copier votre cle publique <br/>
  -> Ouvrir le Pare-feu Windows en entre pour le protocol SSH (TCP 22) <br/>
- -> Dans la base de registre HKLM/SOFTWARE/OpenSSH créer une "String Value" "DefaultShell" en valeur mettre le chemin de PowerShell (C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe)<br/>
+ -> Dans la base de registre HKLM/SOFTWARE/OpenSSH creer une "String Value" "DefaultShell" en valeur mettre le chemin de PowerShell (C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe)<br/>
  -> modifier le fichier C:\ProgramData\ssh\sshd_config:<br/>
      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-> decommenter 'PubkeyAuthentication yes'<br/>
      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-> commenter '#Match Group administrators'<br/>

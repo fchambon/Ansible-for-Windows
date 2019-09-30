@@ -1,5 +1,0 @@
----
-rg_name: RG-ansible-Win
-public_ip_vm_1: ip-Pub-vm-1
-allocation_method: Dynamic
-...

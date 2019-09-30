@@ -1,7 +1,0 @@
----
-- name: Installation de l' IP Publique VM-Lx
-  azure_rm_publicipaddress:
-    resource_group: "{{ rg_name }}"
-    name: "{{ public_ip_vm_lx }}"
-    allocation_method: "{{ allocation_method }}"
-...
