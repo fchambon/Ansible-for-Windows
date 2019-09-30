@@ -17,11 +17,27 @@ Pour le paramétrage du serveur OpenSSH (Windows 2016/2019) il faut :<br/>
  -> créer un fichier texte "authorized_keys" (ex: c:\users\pierrc\.ssh\authorized_keys )<br/>
  -> editez le fichier "authorized_keys" et copier votre cle publique <br/>
  -> Ouvrir le Pare-feu Windows en entre pour le protocol SSH (TCP 22) <br/>
- -> Dans la base de registre HKLM/SOFTWARE/OpenSSH DefaultShell mettre le chemin de PowerShell (C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe)<br/>
+ -> Dans la base de registre HKLM/SOFTWARE/OpenSSH créer une "String Value" "DefaultShell" en valeur mettre le chemin de PowerShell (C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe)<br/>
  -> modifier le fichier C:\ProgramData\ssh\sshd_config:<br/>
      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-> decommenter 'PubkeyAuthentication yes'<br/>
      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-> commenter '#Match Group administrators'<br/>
      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-> commenter '#AuthorizedKeysFile __PROGRAMDATA__/ssh/administrators_authorized_keys'<br/>
+ -> redemarrer les services "OpenSSH SSH Server" & "OpenSSH Authentication Agent" <br/>
+ -> test "ssh pierrc@ipvmazure"
+
+- Pour Windows Server 2019 <br/>
+ -> Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0<br/>
+ -> créer un repertoire .ssh dans votre profil (ex: c:\users\pierrc\.ssh) <br/>
+ -> créer un fichier texte "authorized_keys" (ex: c:\users\pierrc\.ssh\authorized_keys )<br/>
+ -> editez le fichier "authorized_keys" et copier votre cle publique <br/>
+ -> demarrer les services "OpenSSH SSH Server"
+ -> Dans la base de registre HKLM/SOFTWARE/OpenSSH créer une "String Value" "DefaultShell" en valeur mettre le chemin de PowerShell (C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe)<br/>
+ -> modifier le fichier C:\ProgramData\ssh\sshd_config:<br/>
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-> decommenter 'PubkeyAuthentication yes'<br/>
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-> commenter '#Match Group administrators'<br/>
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-> commenter '#AuthorizedKeysFile __PROGRAMDATA__/ssh/administrators_authorized_keys'<br/>
+ -> redemarrer les services "OpenSSH SSH Server" & "OpenSSH Authentication Agent" <br/>
+ -> test "ssh pierrc@ipvmazure"
 
 **Prerequis pour la machine de controle :**<br/>
 Pour une distro Ubuntu 16.04 LTS : <br/>
