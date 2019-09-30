@@ -19,7 +19,7 @@ Pour le paramétrage du serveur OpenSSH (Windows 2016/2019) il faut :<br/>
  -> Ouvrir le Pare-feu Windows en entre pour le protocol SSH (TCP 22) <br/>
  -> Dans la base de registre HKLM/SOFTWARE/OpenSSH DefaultShell mettre le chemin de PowerShell (C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe)<br/>
  -> modifier le fichier C:\ProgramData\ssh\sshd_config<br/>
-     -> decommenter 'PubkeyAuthentication yes'<br/>
+     * -> decommenter 'PubkeyAuthentication yes'<br/>
      -> commenter '#Match Group administrators'<br/>
      -> commenter '#AuthorizedKeysFile __PROGRAMDATA__/ssh/administrators_authorized_keys'<br/>
 
