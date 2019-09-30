@@ -9,13 +9,19 @@ Pour Windows Server 2019 c'est une nouvelle "feature". https://docs.microsoft.co
 Pour Windows Server 2016 https://github.com/PowerShell/Win32-OpenSSH/releases <br/>
 
 Pour le paramétrage du serveur OpenSSH (Windows 2016/2019) il faut :<br/>
-- le shell par defaut doit etre le PowerShell<br/>
+- Pour Windows Server 2016 <br/>
+ -> copier "OpenSSH-Win64" dans "c:\Program Files" <br/>
+ -> Executer "install-sshd.ps1" <br/>
+ -> demarrer les services "OpenSSH SSH Server" & "OpenSSH Authentication Agent" <br/>
+ -> créer un repertoire .ssh dans votre profil (ex: c:\users\pierrc\.ssh) <br/>
+ -> créer un fichier texte "authorized_keys" (ex: c:\users\pierrc\.ssh\authorized_keys )<br/>
+ -> editez le fichier "authorized_keys" et copier votre cle publique <br/>
+ -> Ouvrir le Pare-feu Windows en entre pour le protocol SSH (TCP 22) <br/>
  -> Dans la base de registre HKLM/SOFTWARE/OpenSSH DefaultShell mettre le chemin de PowerShell (C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe)<br/>
-- l'authentification par cle ssh <br/>
-modifier le fichier C:\ProgramData\ssh\sshd_config<br/>
- -> decommenter 'PubkeyAuthentication yes'<br/>
- -> commenter '#Match Group administrators'<br/>
- -> commenter '#AuthorizedKeysFile __PROGRAMDATA__/ssh/administrators_authorized_keys'<br/>
+ -> modifier le fichier C:\ProgramData\ssh\sshd_config<br/>
+     -> decommenter 'PubkeyAuthentication yes'<br/>
+     -> commenter '#Match Group administrators'<br/>
+     -> commenter '#AuthorizedKeysFile __PROGRAMDATA__/ssh/administrators_authorized_keys'<br/>
 
 **Prerequis pour la machine de controle :**<br/>
 Pour une distro Ubuntu 16.04 LTS : <br/>
@@ -46,7 +52,8 @@ code winhosts
 ```
 ```
 [win]
-ip pou url
+ip ou url
+ip ou url
 
 [win:vars]
 ansible_connection=ssh
