@@ -102,7 +102,7 @@ ansible-playbook -i winhosts win.yml
   roles:
     - set_disk # intialisation du disque / Creation de la partition / Formatage du disque
     - add_ad   # Ajout du role Active Directory
-    - set_ad   #  
+    - set_ad   # parametrage de l Active Directory
 ...
 ```
 Role "set_disk":<br/>
