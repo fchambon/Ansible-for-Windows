@@ -50,7 +50,7 @@ sudo apt-get update && sudo apt-get install -y libssl-dev libffi-dev python-dev 
 ```
 sudo pip install ansible[azure]
 ```
-- Installation Azure Cli <br/>
+- Installation Azure Cli (option pour installer des ressources Azure) <br/>
 ```
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 ```
@@ -86,3 +86,75 @@ Retour:<br/>
     "ping": "pong"
 }
 ```
+Une fois le test de connexion reussi reste plus qu'a ecrire les playbooks<br/>
+**Les modules WIndows Ansible pour Windows**<br/>
+Les modules Ansible pour Windows sont ici : https://docs.ansible.com/ansible/latest/modules/list_of_windows_modules.html<br/>
+Par exemple, vous avez une VM Windows Server 2019 avec un disque data, voici un exemple de "plabook" avec trois roles pour initialiser le disque et l'installation d'un Active Directory:<br/>
+
+```
+ansible-playbook -i winhosts win.yml
+```
+---
+- hosts: win #bloc win dans l'inventaire (winhost)
+  remote_user: pierrc
+  
+  roles:
+    - set_disk # intialisation du disque / Creation de la partition / Formatage du disque
+    - add_ad   # Ajout du role Active Directory
+    - set_ad   #  
+...
+```
+Role "set_disk":<br/>
+```
+---
+- name: Initialisation du disque data "s"
+  # module win_shell -> PS Initilize-Disk
+  win_shell:
+   "Initialize-Disk -Number 2"
+
+- name: creation de la partition
+  # module win_partition
+  win_partition:
+    drive_letter: S
+    partition_size: -1
+    disk_number: 2
+
+- name: formatage
+  # module win_shell -> PS Format-Volume
+  win_shell:
+    "Format-Volume -DriveLetter S"
+...
+```
+Role "add_ad":<br/>
+```
+---
+- name: Installation du role "Active Directory"
+  # module win_feature
+  win_feature:
+    name: AD-Domain-Services
+    include_management_tools: yes
+    include_sub_features: yes
+    state: present
+...
+```
+Role "set_ad":<br/>
+```
+---
+- name: Setup de l AD
+  # module win_domain
+  win_domain:
+    dns_domain_name: 'ma-pme.local'
+    safe_mode_password: 'Password123$'
+    sysvol_path: S:\Windows\SYSVOL
+  register: win_domain
+
+- name: Reboot le serveur
+  # module win_reboot
+  win_reboot:
+    pre_reboot_delay: 15
+  when: win_domain.reboot_required
+...
+```
+
+
+

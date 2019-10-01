@@ -1,15 +1,18 @@
 ---
-- name: initialize disk
+- name: Initialisation du disque data "s"
+  # module win_shell -> PS Initilize-Disk
   win_shell:
    "Initialize-Disk -Number 2"
 
-- name: create partition
+- name: creation de la partition
+  # module win_partition
   win_partition:
     drive_letter: S
     partition_size: -1
     disk_number: 2
 
-- name: format disk
+- name: formatage
+  # module win_shell -> PS Format-Volume
   win_shell:
     "Format-Volume -DriveLetter S"
 ...

@@ -1,11 +1,14 @@
 ---
 - name: Setup de l AD
+  # module win_domain
   win_domain:
     dns_domain_name: 'ma-pme.local'
     safe_mode_password: 'Password123$'
+    sysvol_path: S:\Windows\SYSVOL
   register: win_domain
 
 - name: Reboot le serveur
+  # module win_reboot
   win_reboot:
     pre_reboot_delay: 15
   when: win_domain.reboot_required
