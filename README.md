@@ -92,9 +92,6 @@ Les modules Ansible pour Windows sont ici : https://docs.ansible.com/ansible/lat
 Par exemple, vous avez une VM Windows Server 2019 avec un disque data, voici un exemple de "plabook" avec trois roles pour initialiser le disque et l'installation d'un Active Directory:<br/>
 
 ```
-ansible-playbook -i winhosts win.yml
-```
-```
 ---
 - hosts: win #bloc win dans l'inventaire (winhost)
   remote_user: pierrc
@@ -155,6 +152,10 @@ Role "set_ad":<br/>
     pre_reboot_delay: 15
   when: win_domain.reboot_required
 ...
+```
+Reste plus qu'a executer le playbook !
+```
+ansible-playbook -i winhosts win.yml
 ```
 
 
