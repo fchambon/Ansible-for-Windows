@@ -1,6 +1,6 @@
 # Quick Start Ansible pour Windows Server dans azure !
 
-Voici un "quickstart" pour gérer les configurations des serveurs "Windows Server 2016/2019" dans Azure<br/>
+Voici un "quickstart" pour gérer les configurations des serveurs "Windows Server 2016/2019" dans Azure.<br/>
 Dans ce quickstart, la communication entre la machine de controle Ansible et les serveurs cibles Windows se fera en SSH avec une authentification par cle publique<br/>
 
 **Prerequis pour les machines cibles Windows Server:**<br/>
@@ -87,12 +87,13 @@ Retour:<br/>
 }
 ```
 Une fois le test de connexion reussi reste plus qu'a ecrire les playbooks<br/>
-**Les modules WIndows Ansible pour Windows**<br/>
+**Les modules Windows Ansible pour Windows**<br/>
 Les modules Ansible pour Windows sont ici : https://docs.ansible.com/ansible/latest/modules/list_of_windows_modules.html<br/>
 Par exemple, vous avez une VM Windows Server 2019 avec un disque data, voici un exemple de "plabook" avec trois roles pour initialiser le disque et l'installation d'un Active Directory:<br/>
 
 ```
 ansible-playbook -i winhosts win.yml
+```
 ```
 ---
 - hosts: win #bloc win dans l'inventaire (winhost)
