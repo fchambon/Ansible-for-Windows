@@ -81,13 +81,13 @@ Retour:<br/>
     "ping": "pong"
 }
 ```
-Une fois le test de connexion reussi il ne reste plus qu'à écrire les playbooks<br/>
+Une fois le test de connexion réussi, il ne reste plus qu'à écrire les playbooks<br/>
 **Les modules Windows Ansible pour Windows**<br/>
 Les modules Ansible pour Windows sont ici : https://docs.ansible.com/ansible/latest/modules/list_of_windows_modules.html<br/>
-Par exemple, vous avez une VM Windows Server 2019 avec un disque data , voici un exemple de "playbook" qui:<br/>
--> initialiser/formater le disque (sysvol)<br/>
--> installater et paramétrer l' Active Directory<br/>
--> rebooter le serveur<br/>
+Par exemple, si vous avez une VM Windows Server 2019 avec un disque data , voici un exemple de "playbook" qui:<br/>
+-> initialise/formate le disque (sysvol)<br/>
+-> installate et paramétre l' Active Directory<br/>
+-> reboot le serveur<br/>
 Création du playbook<br/>
 ```
 vim adwin.yml
