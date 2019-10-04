@@ -40,10 +40,10 @@ Pour le paramétrage du serveur OpenSSH (Windows 2016/2019) il faut :<br/>
  -> redemarrer les services "OpenSSH SSH Server" & "OpenSSH Authentication Agent" <br/>
  -> test "ssh pierrc@ipvmazure"<br/>
 
-Pour gagner du temps, voici un template ARM qui deploie automatiquement un Windows Server 2019 avec un serveur OpenSSH https://github.com/Pierre-Chesne/Windows-Server-2019-OpenSSH <br/>
+Pour gagner du temps, voici un template ARM qui deploie automatiquement un Windows Server 2019 avec un serveur OpenSSH https://github.com/Pierre-Chesne/Windows-Server-2019-OpenSSH plus le paramétrage (authentification par cle publique)<br/>
 
 **Prerequis pour la machine de controle Ansible:**<br/>
-Pour une distro Ubuntu 16.04 LTS : <br/>
+Pour une distribution Ubuntu 16.04 LTS : <br/>
 Installation Ansible <br/>
 - Installation des packages requis pour les modules Azure Python SDK: <br/>
 ```
