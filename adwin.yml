@@ -1,0 +1,55 @@
+---
+- hosts: win
+  remote_user: pierrc
+
+  tasks:
+  - name: Recuperation des infos disque
+    win_disk_facts:
+
+  - name: Initialisation du disque data 
+    win_shell:
+        "Initialize-Disk -Number 2"
+    when: (ansible_disks[2].partition_style == "RAW")
+    notify: 
+        - Creation de la partition
+        - Formatage de la partition
+
+  handlers:
+  - name: Creation de la partition  
+    win_partition:
+      drive_letter: S
+      partition_size: -1
+      disk_number: 2
+
+  - name: Formatage de la partition
+    win_shell:
+     "Format-Volume -DriveLetter S"
+
+- hosts: win
+  remote_user: pierrc
+
+  tasks:
+  - name: Installation du role "Active Directory"  
+    win_feature:
+      name: AD-Domain-Services
+      include_management_tools: yes
+      include_sub_features: yes
+      state: present
+
+  - name: Setup de l "Active Directory"
+    win_domain:
+      create_dns_delegation: no
+      database_path: S:\Windows\NTDS
+      dns_domain_name: ma-pme.local
+      domain_mode: Win2012R2
+      domain_netbios_name: MA-PME
+      forest_mode: Win2012R2
+      safe_mode_password: Password123$
+      sysvol_path: S:\Windows\SYSVOL
+    register: domain_install
+  
+  - name: reboot server
+    win_reboot:
+      pre_reboot_delay: 15
+    when: domain_install.reboot_required
+...

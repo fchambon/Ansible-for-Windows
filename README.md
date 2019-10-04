@@ -56,14 +56,6 @@ sudo pip install ansible[azure]
 ```
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 ```
-- S'authentifier <br/>
-```
-az login
-```
-- Installation du package Python pour Windows <br/>
-```
-sudo pip install pywinrm
-```
 - Inventaire statique pour la gestion des machines cibles. Exemple : <br>
 ```
 vim winhosts
