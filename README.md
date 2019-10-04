@@ -5,7 +5,7 @@ Dans ce quickstart, la communication entre la machine de controle Ansible et les
 
 **Prérequis pour les machines cibles Windows Server:**<br/>
 Pour les machines cibles "Windows Server", il faudra installer un serveur OpenSSH pour Windows avec authentification par clé publique.<br/>
-Pour Windows Server 2019 c'est une nouvelle "feature". https://docs.microsoft.com/fr-fr/windows-server/administration/openssh/openssh_install_firstuse<br/>
+Pour Windows Server 2019, c'est une nouvelle "feature". https://docs.microsoft.com/fr-fr/windows-server/administration/openssh/openssh_install_firstuse<br/>
 Pour Windows Server 2016 il faut recuperer le Server OpenSHH ici :https://github.com/PowerShell/Win32-OpenSSH/releases (prendre OpenSSH-Win64.zip)<br/>
 
 
