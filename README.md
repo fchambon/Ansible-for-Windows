@@ -63,8 +63,8 @@ vim winhosts
 Copier:
 ```
 [win]
-ip ou url Azure
-ip ou url Azure
+ip ou url Azure (machine cible)
+ip ou url Azure (machine cible)
 
 [win:vars]
 ansible_connection=ssh
