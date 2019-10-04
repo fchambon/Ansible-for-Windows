@@ -151,7 +151,7 @@ Par exemple, vous avez une VM Windows Server 2019 avec un disque data , voici un
 ...
 ```
 Reste plus qu'a exécuter le playbook :-) !<br/>
-(pour amélioration de ce playbook, il faudrait mettre en place Ansible-vault pour chiffré le mot de passe)
+(pour amélioration de ce playbook, il faudrait mettre en place Ansible-vault pour chiffrer le mot de passe)
 ```
 ansible-playbook -i winhosts win.yml
 ```
