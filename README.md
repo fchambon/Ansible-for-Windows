@@ -87,7 +87,7 @@ Les modules Ansible pour Windows sont ici : https://docs.ansible.com/ansible/lat
 Par exemple, vous avez une VM Windows Server 2019 avec un disque data , voici un exemple de "playbook" qui:<br/>
 -> initialiser/formater le disque (sysvol)<br/>
 -> installater et paramétrer l' Active Directory<br/>
--> rebooter le serveur:<br/>
+-> rebooter le serveur<br/>
 Création du playbook<br/>
 ```
 vim adwin.yml
