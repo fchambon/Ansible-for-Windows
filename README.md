@@ -44,7 +44,7 @@ Pour gagner du temps, voici un template ARM qui déploie automatiquement un Wind
 
 **Prérequis pour la machine de controle Ansible:**<br/>
 Pour une distribution Ubuntu 16.04 LTS: <br/>
-- Installation des packages requis pour les modules Azure Python SDK: <br/>
+- Installation des packages requis pour les modules "Azure Python SDK": <br/>
 ```
 sudo apt-get update && sudo apt-get install -y libssl-dev libffi-dev python-dev python-pip
 ```
