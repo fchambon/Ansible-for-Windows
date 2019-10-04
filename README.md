@@ -150,7 +150,8 @@ Par exemple, vous avez une VM Windows Server 2019 avec un disque data , voici un
     when: domain_install.reboot_required
 ...
 ```
-Reste plus qu'a exécuter le playbook :-) !
+Reste plus qu'a exécuter le playbook :-) !<br/>
+(pour amélioration de ce playbook, il faudrait mettre en place Ansible-vault pour chiffré le mot de passe)
 ```
 ansible-playbook -i winhosts win.yml
 ```
