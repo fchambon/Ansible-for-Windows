@@ -48,7 +48,7 @@ Pour une distribution Ubuntu 16.04 LTS: <br/>
 ```
 sudo apt-get update && sudo apt-get install -y libssl-dev libffi-dev python-dev python-pip
 ```
-- Installation packages Ansible pour azure:
+- Installation packages Ansible pour Azure:
 ```
 sudo pip install ansible[azure]
 ```
