@@ -5,8 +5,8 @@ Dans ce quickstart, la communication entre la machine de controle Ansible et les
 
 **Prerequis pour les machines cibles Windows Server:**<br/>
 Pour les machines cibles "Windows Server", il faudra installer un serveur OpenSSH pour Windows avec authentification par cle publique.<br/>
-Pour Windows Server 2019 c'est une nouvelle "feature". https://docs.microsoft.com/fr-fr/windows-server/administration/openssh/openssh_install_firstuse Exemple de template : https://github.com/Pierre-Chesne/Windows-Server-2019-OpenSSH <br/>
-Pour Windows Server 2016 https://github.com/PowerShell/Win32-OpenSSH/releases (prendre OpenSSH-Win64.zip)<br/>
+Pour Windows Server 2019 c'est une nouvelle "feature". https://docs.microsoft.com/fr-fr/windows-server/administration/openssh/openssh_install_firstuse Pour Windows Server 2016 https://github.com/PowerShell/Win32-OpenSSH/releases (prendre OpenSSH-Win64.zip)<br/>
+
 
 Pour le paramétrage du serveur OpenSSH (Windows 2016/2019) il faut :<br/>
 - Pour Windows Server 2016 <br/>
@@ -23,8 +23,8 @@ Pour le paramétrage du serveur OpenSSH (Windows 2016/2019) il faut :<br/>
      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-> commenter '#Match Group administrators'<br/>
      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-> commenter '#AuthorizedKeysFile __PROGRAMDATA__/ssh/administrators_authorized_keys'<br/>
  -> redemarrer les services "OpenSSH SSH Server" & "OpenSSH Authentication Agent" <br/>
- -> test "ssh pierrc@ipvmazure"
-
+ -> test "ssh pierrc@ipvmazure" <br/>
+ 
 - Pour Windows Server 2019 <br/>
  -> Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0<br/>
  -> créer un repertoire .ssh dans votre profil (ex: c:\users\pierrc\.ssh) <br/>
@@ -37,9 +37,11 @@ Pour le paramétrage du serveur OpenSSH (Windows 2016/2019) il faut :<br/>
      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-> commenter '#Match Group administrators'<br/>
      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-> commenter '#AuthorizedKeysFile __PROGRAMDATA__/ssh/administrators_authorized_keys'<br/>
  -> redemarrer les services "OpenSSH SSH Server" & "OpenSSH Authentication Agent" <br/>
- -> test "ssh pierrc@ipvmazure"
+ -> test "ssh pierrc@ipvmazure"<br/>
 
-**Prerequis pour la machine de controle :**<br/>
+Pour gagner du temps, voici un template ARM qui deploie automatiquement un Windows Server 2019 avec un serveur OpenSSH https://github.com/Pierre-Chesne/Windows-Server-2019-OpenSSH <br/>
+
+**Prerequis pour la machine de controle Ansible:**<br/>
 Pour une distro Ubuntu 16.04 LTS : <br/>
 Installation Ansible <br/>
 - Installation des packages requis pour les modules Azure Python SDK: <br/>
@@ -50,7 +52,7 @@ sudo apt-get update && sudo apt-get install -y libssl-dev libffi-dev python-dev 
 ```
 sudo pip install ansible[azure]
 ```
-- Installation Azure Cli (option pour installer des ressources Azure) <br/>
+- Installation Azure Cli (option pour installer des ressources Azure ou pour inventaire dynamique) <br/>
 ```
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 ```
@@ -62,10 +64,11 @@ az login
 ```
 sudo pip install pywinrm
 ```
-- Inventaire pour la gestion des machines cibles. Exemple : <br>
+- Inventaire statique pour la gestion des machines cibles. Exemple : <br>
 ```
-code winhosts
+vim winhosts
 ```
+Copier:
 ```
 [win]
 ip ou url
@@ -89,68 +92,62 @@ Retour:<br/>
 Une fois le test de connexion reussi reste plus qu'a ecrire les playbooks<br/>
 **Les modules Windows Ansible pour Windows**<br/>
 Les modules Ansible pour Windows sont ici : https://docs.ansible.com/ansible/latest/modules/list_of_windows_modules.html<br/>
-Par exemple, vous avez une VM Windows Server 2019 avec un disque data, voici un exemple de "plabook" avec trois roles pour initialiser le disque et l'installation d'un Active Directory:<br/>
-
+Par exemple, vous avez une VM Windows Server 2019 avec un disque data , voici un exemple de "playbook" qui va initialiser le disque (sysvol), installater l' Active Directory et rebooter le serveur:<br/>
 ```
 ---
-- hosts: win #bloc win dans l'inventaire (winhost)
+- hosts: win
   remote_user: pierrc
+
+  tasks:
+  - name: Recuperation des infos disque
+    win_disk_facts:
+
+  - name: Initialisation du disque data 
+    win_shell:
+        "Initialize-Disk -Number 2"
+    when: (ansible_disks[2].partition_style == "RAW")
+    notify: 
+        - Creation de la partition
+        - Formatage de la partition
+
+  handlers:
+  - name: Creation de la partition  
+    win_partition:
+      drive_letter: S
+      partition_size: -1
+      disk_number: 2
+
+  - name: Formatage de la partition
+    win_shell:
+     "Format-Volume -DriveLetter S"
+
+- hosts: win
+  remote_user: pierrc
+
+  tasks:
+  - name: Installation du role "Active Directory"  
+    win_feature:
+      name: AD-Domain-Services
+      include_management_tools: yes
+      include_sub_features: yes
+      state: present
+
+  - name: Setup de l "Active Directory"
+    win_domain:
+      create_dns_delegation: no
+      database_path: S:\Windows\NTDS
+      dns_domain_name: ma-pme.local
+      domain_mode: Win2012R2
+      domain_netbios_name: MA-PME
+      forest_mode: Win2012R2
+      safe_mode_password: Password123$
+      sysvol_path: S:\Windows\SYSVOL
+    register: domain_install
   
-  roles:
-    - set_disk # intialisation du disque / Creation de la partition / Formatage du disque
-    - add_ad   # Ajout du role Active Directory
-    - set_ad   # parametrage de l Active Directory
-...
-```
-Role "set_disk":<br/>
-```
----
-- name: Initialisation du disque data "s"
-  # module win_shell -> PS Initilize-Disk
-  win_shell:
-   "Initialize-Disk -Number 2"
-
-- name: creation de la partition
-  # module win_partition
-  win_partition:
-    drive_letter: S
-    partition_size: -1
-    disk_number: 2
-
-- name: formatage
-  # module win_shell -> PS Format-Volume
-  win_shell:
-    "Format-Volume -DriveLetter S"
-...
-```
-Role "add_ad":<br/>
-```
----
-- name: Installation du role "Active Directory"
-  # module win_feature
-  win_feature:
-    name: AD-Domain-Services
-    include_management_tools: yes
-    include_sub_features: yes
-    state: present
-...
-```
-Role "set_ad":<br/>
-```
----
-- name: Setup de l AD
-  # module win_domain
-  win_domain:
-    dns_domain_name: 'ma-pme.local'
-    safe_mode_password: 'Password123$'
-    sysvol_path: S:\Windows\SYSVOL
-  register: win_domain
-
-- name: Reboot le serveur
-  # module win_reboot
-  win_reboot:
-    pre_reboot_delay: 15
-  when: win_domain.reboot_required
+  - name: reboot server
+    win_reboot:
+      pre_reboot_delay: 15
+    when: domain_install.reboot_required
 ...
 ```
 Reste plus qu'a executer le playbook !
