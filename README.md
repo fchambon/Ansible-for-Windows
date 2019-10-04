@@ -52,7 +52,7 @@ sudo apt-get update && sudo apt-get install -y libssl-dev libffi-dev python-dev 
 ```
 sudo pip install ansible[azure]
 ```
-- Installation Azure Cli (option pour installer des ressources Azure ou pour inventaire dynamique) <br/>
+- Installation Azure Cli (en option pour l'installation de ressources dans Azure ou pour gérer un inventaire dynamique) <br/>
 ```
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 ```
@@ -150,7 +150,7 @@ Par exemple, vous avez une VM Windows Server 2019 avec un disque data , voici un
     when: domain_install.reboot_required
 ...
 ```
-Reste plus qu'a exécuter le playbook !
+Reste plus qu'a exécuter le playbook :-) !
 ```
 ansible-playbook -i winhosts win.yml
 ```
