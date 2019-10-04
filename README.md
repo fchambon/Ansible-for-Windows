@@ -70,7 +70,7 @@ ip ou url Azure (machine cible)
 ansible_connection=ssh
 ansible_shell_type=powershell
 ```
-Il faut que le serveur cible doit être joingnable en SSH (TCP 22 Pare feu Windows/NSG Azure)
+Il faut que le serveur cible doit être joingnable en SSH (TCP 22 Pare feu Windows/NSG Azure)<br/>
 Test de la connexion:<br/>
 ```
 ansible -i winhosts win -m win_ping
