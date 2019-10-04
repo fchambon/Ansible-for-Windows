@@ -3,7 +3,7 @@
 Voici un "quickstart" pour gérer les configurations des serveurs "Windows Server 2016/2019" dans Azure.<br/>
 Dans ce quickstart, la communication entre la machine de controle Ansible et les serveurs cibles Windows se fera en SSH avec une authentification par clé publique<br/>
 
-**Prerequis pour les machines cibles Windows Server:**<br/>
+**Prérequis pour les machines cibles Windows Server:**<br/>
 Pour les machines cibles "Windows Server", il faudra installer un serveur OpenSSH pour Windows avec authentification par clé publique.<br/>
 Pour Windows Server 2019 c'est une nouvelle "feature". https://docs.microsoft.com/fr-fr/windows-server/administration/openssh/openssh_install_firstuse<br/>
 Pour Windows Server 2016 il faut recuperer le Server OpenSHH ici :https://github.com/PowerShell/Win32-OpenSSH/releases (prendre OpenSSH-Win64.zip)<br/>
@@ -42,7 +42,7 @@ Pour le paramétrage du serveur OpenSSH (Windows 2016/2019) il faut :<br/>
 
 Pour gagner du temps, voici un template ARM qui déploie automatiquement un Windows Server 2019 avec un serveur OpenSSH https://github.com/Pierre-Chesne/Windows-Server-2019-OpenSSH plus le paramétrage (authentification par cle publique)<br/>
 
-**Prerequis pour la machine de controle Ansible:**<br/>
+**Prérequis pour la machine de controle Ansible:**<br/>
 Pour une distribution Ubuntu 16.04 LTS : <br/>
 Installation Ansible <br/>
 - Installation des packages requis pour les modules Azure Python SDK: <br/>
